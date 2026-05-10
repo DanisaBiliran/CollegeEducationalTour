@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Industry Visit Educational Tour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1209;
+      --paper: #faf7f2;
+      --paper-dark: #f0ead8;
+      --sepia: #9a7730;
+      --rust: #c44b2a;
+      --forest: #2e5438;
+      --navy: #1a3a6b;
+      --muted: #7a6a52;
+      --line: #d9cdb4;
+      --sky: #c8dff0;
+      --sky-deep: #4a89c8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', Georgia, sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 3px solid var(--sepia);
+    }
+    .top-nav-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-brand {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--line);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .hero {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-sky {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #0d1b3e 0%, #1a3a6b 35%, #2d5a9e 60%, #8ba8c8 85%, #c4a882 100%);
+      opacity: 0.9;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 39px,
+        rgba(255,255,255,0.04) 39px,
+        rgba(255,255,255,0.04) 40px
+      );
+      z-index: 1;
+    }
+    .hero-stars {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 40%;
+      z-index: 2;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle var(--dur, 3s) ease-in-out infinite;
+      animation-delay: var(--del, 0s);
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.15; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.3); }
+    }
+    .cloud {
+      position: absolute;
+      z-index: 3;
+      animation: cloudDrift var(--cd, 40s) linear infinite;
+      animation-delay: var(--cdel, 0s);
+    }
+    @keyframes cloudDrift {
+      from { transform: translateX(-200px); opacity: 0; }
+      5% { opacity: 1; }
+      95% { opacity: 1; }
+      to { transform: translateX(110vw); opacity: 0; }
+    }
+    .cloud-shape { fill: rgba(255,255,255,0.18); }
+    .plane-main {
+      position: absolute;
+      z-index: 10;
+      top: 22%;
+      left: -120px;
+      animation: flyAcross 18s ease-in-out infinite;
+      animation-delay: 1s;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+    }
+    @keyframes flyAcross {
+      0% { left: -140px; top: 24%; transform: rotate(-2deg); opacity: 0; }
+      5% { opacity: 1; }
+      40% { top: 18%; transform: rotate(1deg); }
+      60% { top: 20%; transform: rotate(-1deg); }
+      95% { opacity: 1; }
+      100% { left: calc(100% + 140px); top: 16%; transform: rotate(2deg); opacity: 0; }
+    }
+    .contrail {
+      position: absolute;
+      z-index: 9;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+    }
+    .contrail-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), rgba(255,255,255,0.3), transparent);
+      border-radius: 2px;
+      top: 23%;
+      left: 0;
+      right: 0;
+      animation: contrailFade 18s ease-in-out infinite;
+      animation-delay: 1s;
+      transform-origin: left center;
+      opacity: 0;
+    }
+    @keyframes contrailFade {
+      0%, 4% { opacity: 0; clip-path: inset(0 100% 0 0); }
+      8% { opacity: 1; clip-path: inset(0 70% 0 0); }
+      50% { opacity: 0.8; clip-path: inset(0 10% 0 0); }
+      80% { opacity: 0.4; clip-path: inset(0 0% 0 0); }
+      100% { opacity: 0; clip-path: inset(0 0% 0 0); }
+    }
+    .plane-small {
+      position: absolute;
+      z-index: 8;
+      top: 8%;
+      left: -80px;
+      opacity: 0.7;
+      animation: flySmall 28s linear infinite;
+      animation-delay: 7s;
+    }
+    @keyframes flySmall {
+      from { left: -80px; opacity: 0; }
+      5% { opacity: 0.7; }
+      95% { opacity: 0.7; }
+      to { left: calc(100% + 80px); opacity: 0; }
+    }
+    .road-section {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: 80px;
+      z-index: 12;
+    }
+    .road {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 52px;
+      background: #2a2418;
+    }
+    .road-line {
+      position: absolute;
+      top: 50%;
+      left: 0; right: 0;
+      height: 3px;
+      background: repeating-linear-gradient(90deg, #c8a832 0, #c8a832 30px, transparent 30px, transparent 60px);
+      transform: translateY(-50%);
+      animation: roadMove 1s linear infinite;
+    }
+    @keyframes roadMove {
+      from { background-position: 0 0; }
+      to { background-position: -60px 0; }
+    }
+    .road-shoulder {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: #c8a832;
+      opacity: 0.6;
+    }
+    .bus-wrap {
+      position: absolute;
+      bottom: 52px;
+      left: -120px;
+      animation: busDrive 16s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      animation-delay: 2s;
+      z-index: 13;
+      transform-origin: center bottom;
+    }
+    @keyframes busDrive {
+      0% { left: -120px; opacity: 0; }
+      3% { opacity: 1; }
+      40% { left: 38%; }
+      55% { left: 38%; }
+      97% { opacity: 1; }
+      100% { left: calc(100% + 120px); opacity: 0; }
+    }
+    .wheel {
+      animation: spin 0.4s linear infinite;
+      transform-origin: center;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .bus-stop {
+      position: absolute;
+      bottom: 52px;
+      left: 38%;
+      z-index: 11;
+      animation: stopAppear 16s ease infinite;
+      animation-delay: 2s;
+    }
+    @keyframes stopAppear {
+      0%, 38% { opacity: 0; }
+      42% { opacity: 1; }
+      57% { opacity: 1; }
+      61% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    .city-silhouette {
+      position: absolute;
+      bottom: 52px;
+      left: 0; right: 0;
+      z-index: 7;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 20;
+      padding: 70px 24px 100px;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #f0c060;
+      margin-bottom: 20px;
+      font-family: 'DM Mono', monospace;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 400;
+      line-height: 1.05;
+      margin-bottom: 22px;
+      position: relative;
+      animation: fadeUp 0.8s ease 0.4s both;
+    }
+    .hero-title em { color: #f0c060; font-style: italic; }
+    .hero-subtitle {
+      color: rgba(250,247,242,0.6);
+      font-size: 15px;
+      max-width: 440px;
+      margin: 0 auto 40px;
+      font-style: italic;
+      animation: fadeUp 0.8s ease 0.6s both;
+    }
+    .hero-meta {
+      display: inline-flex;
+      gap: 36px;
+      border-top: 1px solid rgba(240,192,96,0.3);
+      padding-top: 28px;
+      margin-top: 50px;
+      animation: fadeUp 0.8s ease 0.8s both;
+    }
+    .hero-meta-item { text-align: center; }
+    .hero-meta-label {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #f0c060;
+      font-family: 'DM Mono', monospace;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .hero-meta-value {
+      font-size: 24px;
+      color: var(--paper);
+      display: block;
+      font-family: 'Playfair Display', serif;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .timeline-nav {
+      background: var(--paper-dark);
+      border-bottom: 1px solid var(--line);
+      padding: 0 24px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      position: sticky;
+      top: 0px;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+    }
+    .timeline-nav-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      min-width: min-content;
+    }
+    .page-nav-links {
+      display: flex;
+      gap: 24px;
+      margin-right: 20px;
+      padding-right: 20px;
+      border-right: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+    .page-nav-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      opacity: 0.6;
+      transition: opacity 0.2s, color 0.2s;
+      white-space: nowrap;
+      padding: 16px 0;
+      display: block;
+    }
+    .page-nav-links a:hover { opacity: 1; color: var(--rust); }
+    .day-tabs-container { display: flex; flex: 1; }
+    .day-tab {
+      flex-shrink: 0;
+      padding: 14px 18px;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      transition: all 0.2s;
+      line-height: 1.3;
+      text-align: center;
+    }
+    .day-tab:hover { color: var(--ink); }
+    .day-tab.active { color: var(--rust); border-bottom-color: var(--rust); }
+    .day-tab span { display: block; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; }
+
+    .entries-wrapper { padding: 56px 0; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    .day-entry { display: none; animation: entryReveal 0.5s ease both; }
+    .day-entry.active { display: block; }
+    @keyframes entryReveal {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .entry-header {
+      margin-bottom: 44px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .entry-stamp {
+      position: absolute;
+      top: 0; right: 0;
+      width: 72px;
+      height: 72px;
+      border: 2px dashed var(--rust);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.35;
+      transform: rotate(12deg);
+      font-family: 'DM Mono', monospace;
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--rust);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .entry-day-badge {
+      display: inline-block;
+      background: var(--rust);
+      color: var(--paper);
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      padding: 5px 14px;
+      margin-bottom: 14px;
+    }
+    .entry-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .entry-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .entry-meta-item { display: flex; align-items: center; gap: 7px; }
+    .entry-meta-icon { width: 14px; height: 14px; fill: none; stroke: var(--sepia); stroke-width: 1.5; }
+    .section-label {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sepia);
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+    .content-block { margin-bottom: 36px; }
+    .content-block p { margin-bottom: 16px; }
+    .summary-text {
+      background: var(--paper-dark);
+      padding: 24px 28px;
+      border-left: 4px solid var(--forest);
+      font-size: 15px;
+      line-height: 1.85;
+      position: relative;
+      overflow: hidden;
+    }
+    .summary-text::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(62,84,56,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(62,84,56,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+    .learnings-reflection-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 36px;
+      align-items: start;
+    }
+    .learnings-text {
+      background: #f5efe4;
+      padding: 22px 26px;
+      border-left: 4px solid var(--navy);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+    .reflection-block {
+      background: var(--paper-dark);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--sepia);
+      padding: 24px 24px 18px;
+      position: relative;
+    }
+    .reflection-block::before {
+      content: '\201C';
+      font-size: 64px;
+      color: var(--line);
+      position: absolute;
+      top: -10px; left: 14px;
+      line-height: 1;
+      font-family: 'Playfair Display', serif;
+    }
+    .reflection-block p {
+      font-size: 15px;
+      line-height: 1.9;
+      font-style: italic;
+      padding-left: 14px;
+      color: var(--ink);
+    }
+    @media (max-width: 680px) {
+      .learnings-reflection-row { grid-template-columns: 1fr; }
+    }
+    .ornament {
+      text-align: center;
+      color: var(--sepia);
+      font-size: 14px;
+      letter-spacing: 18px;
+      margin: 28px 0;
+      opacity: 0.45;
+    }
+
+    /* ── Photos ── */
+    .photos-section { margin-bottom: 36px; }
+    .photos-preview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .photo-thumb {
+      aspect-ratio: 4/3;
+      background: var(--paper-dark);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
+      position: relative;
+    }
+    .photo-thumb:hover { transform: scale(1.03); border-color: var(--sepia); }
+    .photo-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .see-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 1.5px solid var(--sepia);
+      color: var(--sepia);
+      padding: 9px 20px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .see-more-btn:hover { background: var(--sepia); color: var(--paper); }
+
+    /* photo count badge */
+    .photo-count-badge {
+      display: inline-block;
+      background: var(--sepia);
+      color: var(--paper);
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      padding: 2px 8px;
+      margin-left: 8px;
+      border-radius: 2px;
+      vertical-align: middle;
+    }
+
+    /* loading shimmer */
+    .photo-shimmer {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--paper-dark) 25%, var(--line) 50%, var(--paper-dark) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.2s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .about-section {
+      background: var(--paper-dark);
+      margin: 36px 0 56px;
+      padding: 36px 40px;
+      border-left: 6px solid var(--rust);
+      display: none;
+      animation: entryReveal 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-section::after {
+      content: 'WMSU';
+      position: absolute;
+      bottom: -20px;
+      right: -10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 120px;
+      color: rgba(154,119,48,0.06);
+      pointer-events: none;
+    }
+    .about-section.visible { display: block; }
+    .about-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+    .about-section p { margin-bottom: 18px; line-height: 1.85; }
+    .about-section .signature {
+      margin-top: 24px;
+      font-style: italic;
+      border-top: 1px dashed var(--line);
+      padding-top: 18px;
+      color: var(--rust);
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26,18,9,0.94);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--ink);
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(212,196,160,0.2);
+    }
+    .modal-title {
+      color: var(--paper);
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--line);
+      font-size: 22px;
+      cursor: pointer;
+    }
+    .modal-close:hover { color: var(--paper); }
+    .modal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 2px;
+      padding: 2px;
+    }
+    .modal-photo {
+      aspect-ratio: 4/3;
+      background: rgba(212,196,160,0.05);
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+    .modal-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .modal-photo:hover img { transform: scale(1.05); }
+    .modal-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(43,32,22,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .modal-photo:hover .modal-photo-overlay { opacity: 1; }
+    .modal-photo-overlay svg { stroke: white; }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.97);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none; border: none;
+      color: white; font-size: 26px; cursor: pointer;
+    }
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      object-fit: contain;
+      display: block;
+    }
+    .lb-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.5);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+    }
+    .lb-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      font-size: 28px;
+      width: 48px; height: 64px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 4px;
+    }
+    .lb-arrow:hover { background: rgba(255,255,255,0.22); }
+    .lb-prev { left: 12px; }
+    .lb-next { right: 12px; }
+
+    .site-footer {
+      background: var(--ink);
+      color: rgba(250,247,242,0.35);
+      text-align: center;
+      padding: 44px 24px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      font-family: 'DM Mono', monospace;
+      margin-top: 40px;
+      border-top: 3px solid var(--sepia);
+      position: relative;
+    }
+    .site-footer strong { color: var(--sepia); }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rust), var(--sepia));
+      z-index: 9999;
+      width: 0%;
+      transition: width 0.1s;
+    }
+
+    .mini-plane-indicator {
+      position: fixed;
+      right: 24px;
+      bottom: 30px;
+      z-index: 500;
+      cursor: pointer;
+      animation: float 3s ease-in-out infinite;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .mini-plane-indicator:hover { opacity: 1; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-30deg); }
+      50% { transform: translateY(-8px) rotate(-25deg); }
+    }
+
+    @media (max-width: 600px) {
+      .hero-content { padding: 50px 20px 90px; }
+      .hero-meta { gap: 20px; }
+      .photos-preview { grid-template-columns: repeat(2, 1fr); }
+      .modal-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-section { padding: 24px; }
+      .entry-stamp { display: none; }
+    }
+
+    .day-transition-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none;
+      display: flex; align-items: center; justify-content: center;
+      background: #1a1209; opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .day-transition-overlay.entering { opacity: 1; pointer-events: all; }
+    .day-transition-overlay.exiting  { opacity: 0; }
+    .dt-inner {
+      display: flex; flex-direction: column; align-items: center; gap: 18px;
+      transform: translateY(20px); opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease;
+    }
+    .day-transition-overlay.entering .dt-inner {
+      transform: translateY(0); opacity: 1; transition-delay: 0.1s;
+    }
+    .dt-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: #f0c060; }
+    .dt-day-number { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(64px, 12vw, 100px); color: #faf7f2; line-height: 1; }
+    .dt-day-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(15px, 3vw, 22px); color: rgba(250,247,242,0.55); font-style: italic; }
+    .dt-road { width: min(320px, 80vw); height: 44px; position: relative; overflow: hidden; border-radius: 3px; }
+    .dt-road-bg { position: absolute; inset: 0; background: #2a2418; border-top: 3px solid rgba(200,168,50,0.4); }
+    .dt-road-dash {
+      position: absolute; top: 50%; left: 0; right: 0; height: 3px;
+      transform: translateY(-50%);
+      background: repeating-linear-gradient(90deg, #c8a832 0, #c8a832 18px, transparent 18px, transparent 36px);
+      animation: dtRoadMove 0.5s linear infinite;
+    }
+    @keyframes dtRoadMove { from { background-position: 0 0; } to { background-position: -36px 0; } }
+    .dt-bus { position: absolute; bottom: 4px; animation: dtBusSlide 0.6s cubic-bezier(0.34,1.3,0.64,1) both; animation-delay: 0.25s; }
+    @keyframes dtBusSlide { from { left: -80px; } to { left: calc(50% - 40px); } }
+    .dt-dots { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+    .dt-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(240,192,96,0.25); transition: all 0.2s; }
+    .dt-dot.active { background: #f0c060; width: 18px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div id="dt-overlay" class="day-transition-overlay">
+  <div class="dt-inner" id="dt-inner">
+    <span class="dt-label">Day</span>
+    <span class="dt-day-number" id="dt-number">01</span>
+    <div class="dt-road">
+      <div class="dt-road-bg"></div>
+      <div class="dt-road-dash"></div>
+      <div class="dt-bus" id="dt-bus">
+        <svg width="80" height="36" viewBox="0 0 80 36" fill="none">
+          <rect x="2" y="4" width="74" height="24" rx="3" fill="#2a5a9e"/>
+          <rect x="2" y="4" width="74" height="7" rx="2" fill="#1a4a8e"/>
+          <rect x="2" y="16" width="74" height="2" fill="#f0c060" opacity="0.7"/>
+          <rect x="6" y="6" width="7" height="5" rx="1" fill="#a8d4f0" opacity="0.9"/>
+          <rect x="16" y="6" width="7" height="5" rx="1" fill="#a8d4f0" opacity="0.9"/>
+          <rect x="26" y="6" width="7" height="5" rx="1" fill="#a8d4f0" opacity="0.9"/>
+          <rect x="36" y="6" width="7" height="5" rx="1" fill="#a8d4f0" opacity="0.9"/>
+          <rect x="58" y="5" width="14" height="16" rx="1" fill="#1a3a7a"/>
+          <rect x="70" y="12" width="5" height="3" rx="1" fill="#ffffaa"/>
+          <circle cx="16" cy="30" r="5" fill="#1a1a2e"/>
+          <circle cx="16" cy="30" r="3" fill="#2a2a4e"/>
+          <circle cx="58" cy="30" r="5" fill="#1a1a2e"/>
+          <circle cx="58" cy="30" r="3" fill="#2a2a4e"/>
+        </svg>
+      </div>
+    </div>
+    <span class="dt-day-title" id="dt-title"></span>
+    <div class="dt-dots" id="dt-dots"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-sky"></div>
+  <div class="hero-stars" id="heroStars"></div>
+  <svg class="cloud" style="--cd:45s;--cdel:0s;top:15%;width:180px;" viewBox="0 0 180 60" fill="none">
+    <ellipse cx="90" cy="38" rx="80" ry="18" class="cloud-shape"/>
+    <ellipse cx="70" cy="30" rx="40" ry="22" class="cloud-shape"/>
+    <ellipse cx="110" cy="28" rx="35" ry="20" class="cloud-shape"/>
+    <ellipse cx="90" cy="24" rx="28" ry="18" class="cloud-shape"/>
+  </svg>
+  <svg class="cloud" style="--cd:60s;--cdel:-20s;top:28%;width:120px;" viewBox="0 0 120 45" fill="none">
+    <ellipse cx="60" cy="30" rx="52" ry="13" class="cloud-shape"/>
+    <ellipse cx="45" cy="22" rx="28" ry="16" class="cloud-shape"/>
+    <ellipse cx="75" cy="20" rx="24" ry="15" class="cloud-shape"/>
+  </svg>
+  <svg class="cloud" style="--cd:38s;--cdel:-10s;top:10%;width:240px;opacity:0.5;" viewBox="0 0 240 70" fill="none">
+    <ellipse cx="120" cy="48" rx="110" ry="20" class="cloud-shape"/>
+    <ellipse cx="90" cy="36" rx="55" ry="28" class="cloud-shape"/>
+    <ellipse cx="145" cy="32" rx="50" ry="26" class="cloud-shape"/>
+    <ellipse cx="118" cy="26" rx="38" ry="22" class="cloud-shape"/>
+  </svg>
+  <div class="contrail"><div class="contrail-line"></div></div>
+  <div class="plane-main">
+    <svg width="110" height="52" viewBox="0 0 110 52" fill="none">
+      <g transform="rotate(-6 55 26)">
+        <path d="M8 26 L85 22 Q100 22 105 26 Q100 30 85 30 L8 26Z" fill="#e8e0d0" stroke="#b0a090" stroke-width="0.5"/>
+        <path d="M38 26 L55 8 L72 26 L55 28Z" fill="#d0c8b8" stroke="#b0a090" stroke-width="0.5"/>
+        <path d="M12 26 L18 16 L28 26 L18 28Z" fill="#d0c8b8" stroke="#b0a090" stroke-width="0.5"/>
+        <path d="M12 26 L20 26 L16 14Z" fill="#c8b0a0" stroke="#b0a090" stroke-width="0.5"/>
+        <rect x="60" y="23" width="6" height="4" rx="1" fill="#a8c8e8" opacity="0.8"/>
+        <rect x="70" y="23" width="6" height="4" rx="1" fill="#a8c8e8" opacity="0.8"/>
+        <rect x="80" y="23" width="5" height="4" rx="1" fill="#a8c8e8" opacity="0.8"/>
+        <ellipse cx="105" cy="26" rx="5" ry="4" fill="#c8c0b0"/>
+        <ellipse cx="52" cy="30" rx="7" ry="4" fill="#b8b0a0" stroke="#a0988a" stroke-width="0.5"/>
+      </g>
+    </svg>
+  </div>
+  <div class="plane-small">
+    <svg width="50" height="24" viewBox="0 0 50 24" fill="none">
+      <path d="M4 12 L38 10 Q46 10 48 12 Q46 14 38 14 L4 12Z" fill="rgba(255,255,255,0.6)"/>
+      <path d="M18 12 L24 5 L32 12 L24 13Z" fill="rgba(255,255,255,0.45)"/>
+      <path d="M6 12 L10 8 L16 12 L10 13Z" fill="rgba(255,255,255,0.45)"/>
+    </svg>
+  </div>
+  <svg class="city-silhouette" viewBox="0 0 1440 80" preserveAspectRatio="xMidYMax meet" fill="none">
+    <path d="M0 80 L0 60 L20 60 L20 45 L30 45 L30 38 L40 38 L40 45 L50 45 L50 30 L55 30 L55 22 L60 22 L60 30 L65 30 L65 45 L80 45 L80 50 L90 50 L90 35 L95 35 L95 28 L100 28 L100 35 L110 35 L110 50 L130 50 L130 40 L140 40 L140 32 L148 32 L148 40 L160 40 L160 55 L170 55 L170 42 L180 42 L180 38 L188 38 L188 42 L200 42 L200 55 L220 55 L220 48 L230 48 L230 36 L238 36 L238 48 L250 48 L250 55 L270 55 L270 45 L280 45 L280 36 L290 36 L290 30 L300 30 L300 36 L310 36 L310 45 L330 45 L330 52 L350 52 L350 40 L360 40 L360 32 L370 32 L370 40 L380 40 L380 52 L400 52 L400 58 L420 58 L420 48 L435 48 L435 38 L445 38 L445 48 L460 48 L460 58 L480 58 L480 50 L490 50 L490 42 L500 42 L500 50 L510 50 L510 58 L530 58 L530 48 L540 48 L540 38 L552 38 L552 28 L558 28 L558 38 L570 38 L570 48 L585 48 L585 58 L600 58 L600 52 L615 52 L615 44 L625 44 L625 36 L635 36 L635 44 L645 44 L645 52 L665 52 L665 58 L680 58 L680 48 L695 48 L695 40 L705 40 L705 48 L720 48 L720 58 L740 58 L740 50 L750 50 L750 42 L760 42 L760 50 L775 50 L775 58 L800 58 L800 52 L815 52 L815 44 L825 44 L825 52 L840 52 L840 58 L860 58 L860 48 L875 48 L875 38 L885 38 L885 30 L895 30 L895 38 L905 38 L905 48 L920 48 L920 58 L940 58 L940 50 L955 50 L955 42 L965 42 L965 50 L980 50 L980 58 L1000 58 L1000 52 L1015 52 L1015 44 L1025 44 L1025 52 L1040 52 L1040 58 L1060 58 L1060 48 L1075 48 L1075 38 L1085 38 L1085 48 L1100 48 L1100 58 L1120 58 L1120 50 L1135 50 L1135 40 L1145 40 L1145 50 L1160 50 L1160 58 L1180 58 L1180 52 L1190 52 L1190 44 L1200 44 L1200 52 L1215 52 L1215 58 L1240 58 L1240 48 L1255 48 L1255 38 L1265 38 L1265 48 L1280 48 L1280 58 L1300 58 L1300 50 L1315 50 L1315 42 L1325 42 L1325 50 L1340 50 L1340 58 L1360 58 L1360 52 L1375 52 L1375 44 L1385 44 L1385 52 L1400 52 L1400 58 L1440 58 L1440 80 Z" fill="rgba(26,18,9,0.8)"/>
+  </svg>
+  <div class="road-section">
+    <div class="road">
+      <div class="road-shoulder"></div>
+      <div class="road-line"></div>
+    </div>
+    <div class="bus-stop">
+      <svg width="20" height="50" viewBox="0 0 20 50" fill="none">
+        <rect x="2" y="2" width="16" height="18" rx="2" fill="#c44b2a"/>
+        <text x="10" y="14" text-anchor="middle" font-size="7" fill="white" font-family="monospace" font-weight="bold">BUS</text>
+        <rect x="9" y="20" width="2" height="30" fill="#888"/>
+      </svg>
+    </div>
+    <div class="bus-wrap">
+      <svg width="110" height="52" viewBox="0 0 110 52" fill="none">
+        <rect x="4" y="8" width="100" height="34" rx="4" fill="#2a5a9e"/>
+        <rect x="4" y="8" width="100" height="10" rx="2" fill="#1a4a8e"/>
+        <rect x="6" y="10" width="60" height="7" rx="1" fill="#111" />
+        <text x="36" y="16" text-anchor="middle" font-size="5" fill="#00ff88" font-family="monospace">INDUSTRY VISIT TOUR</text>
+        <rect x="4" y="24" width="100" height="3" fill="#f0c060" opacity="0.8"/>
+        <rect x="10" y="14" width="10" height="8" rx="1.5" fill="#a8d4f0" opacity="0.9"/>
+        <rect x="24" y="14" width="10" height="8" rx="1.5" fill="#a8d4f0" opacity="0.9"/>
+        <rect x="38" y="14" width="10" height="8" rx="1.5" fill="#a8d4f0" opacity="0.9"/>
+        <rect x="52" y="14" width="10" height="8" rx="1.5" fill="#a8d4f0" opacity="0.9"/>
+        <rect x="66" y="14" width="10" height="8" rx="1.5" fill="#a8d4f0" opacity="0.9"/>
+        <rect x="80" y="12" width="18" height="22" rx="1" fill="#1a3a7a"/>
+        <line x1="89" y1="12" x2="89" y2="34" stroke="#4a7abc" stroke-width="0.5"/>
+        <rect x="88" y="8" width="14" height="7" rx="2" fill="#2a5a9e"/>
+        <rect x="90" y="9" width="10" height="5" rx="1" fill="#f0c060" opacity="0.6"/>
+        <rect x="98" y="18" width="6" height="4" rx="1" fill="#ffffaa"/>
+        <rect x="98" y="24" width="6" height="3" rx="1" fill="#ffaaaa" opacity="0.6"/>
+        <g class="wheel" style="transform-origin: 22px 44px;">
+          <circle cx="22" cy="44" r="8" fill="#1a1a2e"/>
+          <circle cx="22" cy="44" r="5" fill="#2a2a4e"/>
+          <circle cx="22" cy="44" r="2" fill="#888"/>
+          <line x1="14" y1="44" x2="30" y2="44" stroke="#666" stroke-width="1"/>
+          <line x1="22" y1="36" x2="22" y2="52" stroke="#666" stroke-width="1"/>
+        </g>
+        <g class="wheel" style="transform-origin: 82px 44px;">
+          <circle cx="82" cy="44" r="8" fill="#1a1a2e"/>
+          <circle cx="82" cy="44" r="5" fill="#2a2a4e"/>
+          <circle cx="82" cy="44" r="2" fill="#888"/>
+          <line x1="74" y1="44" x2="90" y2="44" stroke="#666" stroke-width="1"/>
+          <line x1="82" y1="36" x2="82" y2="52" stroke="#666" stroke-width="1"/>
+        </g>
+        <text x="38" y="34" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,0.5)" font-family="monospace" letter-spacing="1">WMSU IT</text>
+      </svg>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-title">A Glimpse into<br><em>the Real-World Workplace</em></h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Duration</span>
+        <span class="hero-meta-value">8 Days</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Entries</span>
+        <span class="hero-meta-value">8</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Author</span>
+        <span class="hero-meta-value" style="font-size:15px;font-style:italic;font-family:'Playfair Display',serif;">Danisa <br>Biliran</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE NAV -->
+<div class="timeline-nav" id="timelineNav">
+  <div class="timeline-nav-inner">
+    <div class="page-nav-links">
+      <a href="#" id="aboutLink">About</a>
+      <a href="#" id="entriesLink">Entries</a>
+    </div>
+    <div class="day-tabs-container">
+      <button class="day-tab active" onclick="showDay(1,this)"><span>Day</span>01</button>
+      <button class="day-tab" onclick="showDay(2,this)"><span>Day</span>02</button>
+      <button class="day-tab" onclick="showDay(3,this)"><span>Day</span>03</button>
+      <button class="day-tab" onclick="showDay(4,this)"><span>Day</span>04</button>
+      <button class="day-tab" onclick="showDay(5,this)"><span>Day</span>05</button>
+      <button class="day-tab" onclick="showDay(6,this)"><span>Day</span>06</button>
+      <button class="day-tab" onclick="showDay(7,this)"><span>Day</span>07</button>
+      <button class="day-tab" onclick="showDay(8,this)"><span>Day</span>08</button>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<div class="container" id="aboutContainer">
+  <div class="about-section" id="aboutSection">
+    <h3>Reflection</h3>
+    <p style="text-indent: 50px;">The entire Industry Visit Tour was a meaningful and memorable experience for me. Throughout the eight days, I was able to visit different companies, explore new places, and gain a better understanding of what to expect in the real-world workplace. Each day brought new lessons, whether from company visits, travel experiences, or simple moments with my classmates.</p>
+    <p style="text-indent: 50px;">One of the things I truly appreciated was the accommodation provided by DJM Tours and Services Inc. The staff were kind and approachable, and they made sure that we were well taken care of throughout the trip. The place was clean and comfortable, and the meals more than enough for all of us, which made our stay even more amazing. Because of this, I felt safe and at ease during the entire tour.</p>
+    <p style="text-indent: 50px;">This experience also helped me reflect on my own readiness for the future. There were moments when I realized that I still have a lot to learn, and although I have not fully regained the spark that I once had, this tour gave me a sense of hope. During college, I experienced burnout, and at times, I lost interest in what I was doing. However, this experience reminded me that I can still find my way back and continue improving step by step.</p>
+    <p style="text-indent: 50px;">Overall, the tour was worth it. It gave me not only knowledge and experience, but also memories that I will carry with me. It was a journey that allowed me to learn, reflect, and appreciate both my present and my future path.</p>
+    <p><strong>Places visited include:</strong> Hytech Power Inc., OpenText, MMDA, Teleperformance, Top Peg Animation, MicroSourcing, PMA, The Mansion, Baguio, Tagaytay</p>
+    <div class="signature">— Danisa Biliran, BS Information Technology · WMSU · 2026</div>
+  </div>
+</div>
+
+<!-- DAILY ENTRIES -->
+<main class="entries-wrapper" id="entries">
+  <div class="container">
+
+    <!-- DAY 1 -->
+    <article class="day-entry active" id="day-1">
+      <header class="entry-header">
+        <div class="entry-stamp">WMSU<br>IT TOUR<br>DAY 01</div>
+        <div class="entry-day-badge">Day 01 of 08</div>
+        <h2 class="entry-title">First Flight and First Steps into Manila</h2>
+        <div class="entry-meta">
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>April 5, 2026</span>
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Manila</span>
+        </div>
+      </header>
+      <div class="content-block">
+        <p class="section-label">Summary of Activities</p>
+        <div class="summary-text">
+          <p style="text-indent: 50px;">I arrived early at the airport and waited for our departure to Manila. While waiting, I met a few of my friends who were on the same flight. We had a smooth flight, and we arrived safely at NAIA a few minutes earlier than expected. After that, we waited for the bus that would take us to the DJM Dorm.</p>
+          <p style="text-indent: 50px;">When we arrived at the dorm, we were given time to organize our things and settle in before lunch. After lunch, we started our city tour at around 1:15 PM through a bus provided by DJM Tours and Services Inc. During the bus ride, the tour guide shared information about the places that we passed, and she continued different discussions when we arrived at each destination.</p>
+          <p style="text-indent: 50px;">We first visited Luneta Park, where we saw important historical landmarks such as the Rizal Monument and the execution sites of Rizal and Gomburza. After that, we went to Intramuros, where we explored Manila Cathedral and Fort Santiago. I felt amazed at Fort Santiago because I had only learned about it from textbooks before, especially the Spanish Coat of Arms, which was previously discussed by my high school teacher. I also saw a kalesa up close for the first time.</p>
+          <p style="text-indent: 50px;">Before returning to the Dorm, we passed by SM Mall of Asia, and we were given time to explore the area. After some time, the bus picked us up and brought us back to the dorm. We then rested, had dinner, and ended the day with enough sleep.</p>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="learnings-reflection-row">
+        <div class="learnings-col">
+          <p class="section-label">Key Learnings</p>
+          <div class="learnings-text">
+            <p style="text-indent: 50px;">This was my first time riding an airplane, and I learned the proper procedures at the airport such as check-in, security inspection, and boarding. I also learned basic information about several historical places in Manila through the tour guide. In addition, I learned how actual historical sites provide deeper understanding compared to reading from textbooks alone.</p>
+          </div>
+        </div>
+        <div class="reflection-col">
+          <p class="section-label">Personal Reflection</p>
+          <div class="reflection-block">
+            <p style="text-indent: 50px;">The first day of the tour was meaningful because it allowed me to experience history in a more personal way. I felt a sense of appreciation as I stood in places that I had only read about before. I also felt excited to explore more locations in the following days. This experience helped me value both learning and travel as part of my personal growth.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="photos-section">
+        <p class="section-label">Photos from Day 01 <span class="photo-count-badge" id="count-1"></span></p>
+        <div class="photos-preview" id="preview-1"></div>
+        <button class="see-more-btn" onclick="openModal(1)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          See All Photos
+        </button>
+      </div>
+    </article>
+
+    <!-- DAY 2 -->
+    <article class="day-entry" id="day-2">
+      <header class="entry-header">
+        <div class="entry-stamp">WMSU<br>IT TOUR<br>DAY 02</div>
+        <div class="entry-day-badge">Day 02 of 08</div>
+        <h2 class="entry-title">Exploring Companies and Facing the Unexpected</h2>
+        <div class="entry-meta">
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>April 6, 2026</span>
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hytech Power Inc., OpenText</span>
+        </div>
+      </header>
+      <div class="content-block">
+        <p class="section-label">Summary of Activities</p>
+        <div class="summary-text">
+          <p style="text-indent: 50px;">I woke up early to have breakfast and prepare for the day. At 8:00 AM, we rode a bus to Hytech Power Inc., a company that provides technical training and engineering services related to power systems. The employees gave us a tour, where they showed the machines used for training and introduced their training hub.</p>
+          <p style="text-indent: 50px;">We then returned to the dorm for lunch. At 12:38 PM, we traveled again to OpenText, a company that offers solutions for managing digital information and business processes. The speakers explained their services and shared that employees can receive training and change roles within the company. They also prepared games with prizes and provided snacks.</p>
+          <p style="text-indent: 50px;">After the visits, we went back to the dorm to rest and have dinner. Later, we were allowed to go outside as long as we followed the rules. My friends and I went to SM North EDSA, where we enjoyed activities such as Sky Glide and Gootopia. However, on our way back, we had difficulty finding transportation because there were limited Public Utility Vehicles, and we were not familiar with the routes. We felt worried, but we still managed to return on time, although we paid a higher fare. After that, I took a bath and slept.</p>
+        </div>
+      </div>
+      
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="learnings-reflection-row">
+        <div class="learnings-col">
+          <p class="section-label">Key Learnings</p>
+          <div class="learnings-text">
+            <p style="text-indent: 50px;">I learned how companies like Hytech Power Inc. and OpenText train their employees and support career growth. I also realized that companies invest in people to improve their skills. At the same time, I learned the importance of being prepared and aware when traveling in unfamiliar places.</p>
+          </div>
+        </div>
+
+        <div class="reflection-col">
+          <p class="section-label">Personal Reflection</p>
+          <div class="reflection-block">
+            <p style="text-indent: 50px;">The second day of the tour was both educational and challenging. I enjoyed learning about how companies operate, but the experience outside the dorm made me realize how important it is to stay alert and responsible. Even though we felt worried at one point, we were still able to manage the situation, and that made the experience more meaningful for me.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="photos-section"><p class="section-label">Photos from Day 02 <span class="photo-count-badge" id="count-2"></span></p><div class="photos-preview" id="preview-2"></div><button class="see-more-btn" onclick="openModal(2)">See All Photos</button></div>
+    </article>
+
+    <!-- DAY 3 -->
+    <article class="day-entry" id="day-3">
+      <header class="entry-header">
+        <div class="entry-stamp">WMSU<br>IT TOUR<br>DAY 03</div>
+        <div class="entry-day-badge">Day 03 of 08</div>
+        <h2 class="entry-title">Learning Systems and Taking Time to Rest</h2>
+        <div class="entry-meta">
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>April 7, 2026</span>
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>MMDA, TP</span>
+        </div>
+      </header>
+      <div class="content-block">
+        <p class="section-label">Summary of Activities</p>
+        <div class="summary-text">
+            <p style="text-indent: 50px;">I woke up early, had breakfast, and prepared for the day. At around 8:07 AM, we rode a bus to our first destination.</p>
+            <p style="text-indent: 50px;">We arrived at the Metropolitan Manila Development Authority (MMDA), an agency responsible for traffic management and urban services in Metro Manila. A speaker explained their functions and discussed how they monitor traffic through AI systems and CCTV cameras. We were also given the opportunity to ask questions, which helped us understand their operations better.</p>
+            <p style="text-indent: 50px;">After the visit, we returned to the dorm to rest and have lunch. At around 1:19 PM, we traveled again to Teleperformance, a company that provides customer service and business process outsourcing solutions. They explained employee benefits such as partner discounts, and they showed us their workspaces. We also noticed that there were many applicants, which showed the demand for jobs in the company.</p>
+            <p style="text-indent: 50px;">Before returning to the dorm, we were given time to explore TriNoma, where we walked around and relaxed after the company visit. After that, we went back to the dorm earlier than expected, so my friends and I planned to go out later that evening. However, we felt very tired, and we ended up falling asleep instead.</p>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="learnings-reflection-row">
+        <div class="learnings-col">
+          <p class="section-label">Key Learnings</p>
+          <div class="learnings-text">
+            <p style="text-indent: 50px;">I learned how agencies like MMDA manage traffic and maintain order in busy areas through technology and monitoring systems. I also gained an idea of how companies like Teleperformance operate and support their employees. In addition, I realized the importance of balancing activities and rest during busy schedules.</p>
+          </div>
+        </div>
+        <div class="reflection-col">
+          <p class="section-label">Personal Reflection</p>
+          <div class="reflection-block">
+            <p style="text-indent: 50px;">The third day was both informative and relaxing. I appreciated learning about how traffic systems work and how companies manage their operations. At the same time, I realized that rest is also important during trips like this. Even though we planned to go out, choosing to rest helped me recover for the next day’s activities.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="photos-section">
+        <p class="section-label">Photos from Day 03 <span class="photo-count-badge" id="count-3"></span></p>
+        <div class="photos-preview" id="preview-3"></div>
+        <button class="see-more-btn" onclick="openModal(3)">See All Photos</button>
+      </div>
+    </article>
+
+    <!-- DAY 4 -->
+    <article class="day-entry" id="day-4">
+      <header class="entry-header">
+        <div class="entry-stamp">WMSU<br>IT TOUR<br>DAY 04</div>
+        <div class="entry-day-badge">Day 04 of 08</div>
+        <h2 class="entry-title">Inspiration, Reality, and Self-Reflection</h2>
+        <div class="entry-meta">
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>April 8, 2026</span>
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Top Peg Animation, MicroSourcing</span>
+        </div>
+      </header>
+
+      <div class="content-block">
+        <p class="section-label">Summary of Activities</p>
+        <div class="summary-text">
+            <p style="text-indent: 50px;">I woke up early, had breakfast with the group, and prepared for the day. At around 9:06 AM, we rode a bus to Top Peg Animation, a company that produces animation content for television and other media. They introduced their company, showed how they create animations, and shared some of their projects. They also allowed us to try drawing in their workspace, which made the visit more engaging.</p>
+            <p style="text-indent: 50px;">At around 11:50 AM, we had a packed lunch because we could not return to the dorm on time. After that, we traveled to MicroSourcing, a company that provides outsourcing services and various job opportunities. The visit included several speakers who discussed the company, in-demand jobs, and their personal experiences, and they also provided food during the session.</p>
+            <p style="text-indent: 50px;">This was the longest visit, and for me, it was the most impactful. The speakers inspired me and helped me understand what to expect in the working environment. It made me realize that I am not fully prepared yet, but I still have time to improve. This experience motivated me because I have felt burned out during college, and at times, I lost interest in my field.</p>
+            <p style="text-indent: 50px;">After the visit, we returned to the dorm, had dinner, and went to a nearby laundry shop. Later, my friends and I went to a Hong Kong surplus store, where we bought clothes at low prices, and we also visited 7-Eleven. We then picked up our laundry, returned to the dorm on time, washed up, tracked my expenses, and went to sleep.</p>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="learnings-reflection-row">
+        <div class="learnings-col">
+          <p class="section-label">Key Learnings</p>
+          <div class="learnings-text">
+            <p style="text-indent: 50px;">I learned how animation and outsourcing companies operate and offer different career opportunities. I also gained insight into in-demand jobs and realized the importance of preparing myself while I still have time.</p>
+          </div>
+        </div>
+        <div class="reflection-col">
+          <p class="section-label">Personal Reflection</p>
+          <div class="reflection-block">
+            <p style="text-indent: 50px;">The fourth day was the most meaningful for me. The speakers at MicroSourcing made me reflect on my current situation. Although I am not fully ready for the real world, I felt motivated to improve and regain my interest in my field. This day reminded me that I still have time to grow.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="photos-section">
+        <p class="section-label">Photos from Day 04 <span class="photo-count-badge" id="count-4"></span></p>
+        <div class="photos-preview" id="preview-4"></div>
+        <button class="see-more-btn" onclick="openModal(4)">See All Photos</button>
+      </div>
+    </article>
+
+    <!-- DAY 5 -->
+    <article class="day-entry" id="day-5">
+      <header class="entry-header">
+        <div class="entry-stamp">WMSU<br>IT TOUR<br>DAY 05</div>
+        <div class="entry-day-badge">Day 05 of 08</div>
+        <h2 class="entry-title">A Fun Experience in Tagaytay</h2>
+        <div class="entry-meta">
+          <span class="entry-meta-item">
+            <svg class="entry-meta-icon" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            April 9, 2026
+          </span>
+          <span class="entry-meta-item">
+            <svg class="entry-meta-icon" viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Tagaytay
+          </span>
+        </div>
+      </header>
+      <div class="content-block">
+        <p class="section-label">Summary of Activities</p>
+        <div class="summary-text">
+            <p style="text-indent: 50px;">This day was a holiday, so we did not have company visits. Instead, we went out to relax and enjoy the day. At around 6:20 AM, we rode a bus to Tagaytay People’s Park, where we explored the area, took pictures, and bought souvenirs.</p>
+            <p style="text-indent: 50px;">After that, we traveled again at around 9:10 AM, and packed lunches were given during the ride. My friend and I decided to eat early while on the bus.</p>
+            <p style="text-indent: 50px;">We then arrived at Sky Ranch Tagaytay, where we spent several hours enjoying the rides. I felt scared during the Super Vikings ride with the class, and many of us were shouting, which made it a memorable experience. We also tried other rides such as the Mini Vikings, bumper cars, go-kart, roller coaster, and Ferris wheel. I also spent time with a friend at Cartoonville, where we tried the slide and took pictures. It felt like a break after the previous company visits.</p>
+            <p style="text-indent: 50px;">At around 2:00 PM, we returned to the dorm so the bus could be prepared for the trip to Baguio the next day. My friends and I planned to go out again, but we were not allowed due to an issue. We stayed in the dorm, had dinner, washed up, and prepared to sleep. I felt disappointed because our plans were canceled, but I still chose to rest.</p>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="learnings-reflection-row">
+        <div class="learnings-col">
+          <p class="section-label">Key Learnings</p>
+          <div class="learnings-text">
+            <p style="text-indent: 50px;">I learned the importance of taking breaks and enjoying time with others, especially after busy activities. I also realized that plans do not always go as expected, so it is important to stay patient and adjust.</p>
+          </div>
+        </div>
+        <div class="reflection-col">
+          <p class="section-label">Personal Reflection</p>
+          <div class="reflection-block">
+            <p style="text-indent: 50px;">The fifth day was both fun and relaxing. I enjoyed the time in Tagaytay and the moments I shared with my friends. Although the day did not end as planned, I understood that some situations are beyond control. This experience reminded me to stay positive and make the most of each moment.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="photos-section">
+        <p class="section-label">Photos from Day 05 <span class="photo-count-badge" id="count-5"></span></p>
+        <div class="photos-preview" id="preview-5"></div>
+        <button class="see-more-btn" onclick="openModal(5)">See All Photos</button>
+      </div>
+    </article>
+
+    <!-- DAY 6 -->
+    <article class="day-entry" id="day-6">
+      <header class="entry-header">
+        <div class="entry-stamp">WMSU<br>IT TOUR<br>DAY 06</div>
+        <div class="entry-day-badge">Day 06 of 08</div>
+        <h2 class="entry-title">Journey to Baguio and New Experiences</h2>
+        <div class="entry-meta">
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>April 10, 2026</span><span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Baguio City</span>
+        </div>
+      </header>
+
+      <div class="content-block">
+        <p class="section-label">Summary of Activities</p>
+        <div class="summary-text">
+            <p style="text-indent: 50px;">At around 1:12 AM, we departed for Baguio by bus, with two stops for bathroom breaks during the trip. We arrived at the Strawberry Farm at around 5:50 AM, where I bought souvenirs such as strawberry jam and wallets. Although the farm was not yet open, we still enjoyed the nearby stalls and tried strawberry taho.</p>
+            <p style="text-indent: 50px;">At around 7:15 AM, we visited the La Trinidad Bell Church, where we explored and took pictures, and then we proceeded to Prince Plaza Hotel. DJM assisted us with check-in, and we had breakfast, settled in, and were given time to rest before lunch.</p>
+            <p style="text-indent: 50px;">After lunch, we continued our tour to the Philippine Military Academy (PMA), where we explored areas such as Airpower Park, Cavalier’s Park, and the Gregorio del Pilar Statue, and we also saw cadets running in pairs as part of their discipline. We then visited The Mansion and Mines View Park. Although I felt tired at that time, I still bought some souvenirs before we returned to the hotel to rest.</p>
+            <p style="text-indent: 50px;">In the evening, after dinner, we went to the Night Market near Burnham Park, where my friends and I bought clothes, ate at food stalls, and tried pedal go-karts, which were tiring but fun. We returned to the hotel before 11:00 PM, and although we were tired, the experience was worth it. I washed up and went to sleep.</p>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="learnings-reflection-row">
+        <div class="learnings-col">
+          <p class="section-label">Key Learnings</p>
+          <div class="learnings-text">
+            <p style="text-indent: 50px;">I learned how to manage my energy during long trips and appreciate each destination despite fatigue. I also realized the importance of preparation, especially for long travel hours.</p>
+          </div>
+        </div>
+        <div class="reflection-col">
+          <p class="section-label">Personal Reflection</p>
+          <div class="reflection-block">
+            <p style="text-indent: 50px;">The sixth day was both tiring and enjoyable. Despite the long travel time, I appreciated the places we visited and the experiences we had. This day reminded me to make the most of every opportunity, even when I feel tired.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="photos-section">
+        <p class="section-label">Photos from Day 06 <span class="photo-count-badge" id="count-6"></span></p>
+        <div class="photos-preview" id="preview-6"></div>
+        <button class="see-more-btn" onclick="openModal(6)">See All Photos</button>
+      </div>
+    </article>
+
+    <!-- DAY 7 -->
+    <article class="day-entry" id="day-7">
+      <header class="entry-header">
+        <div class="entry-stamp">WMSU<br>IT TOUR<br>DAY 07</div>
+        <div class="entry-day-badge">Day 07 of 08</div>
+        <h2 class="entry-title">Simple Moments and Last Day in Baguio</h2>
+        <div class="entry-meta">
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>April 11, 2026</span><span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Baguio City</span>
+        </div>
+      </header>
+      <div class="content-block">
+        <p class="section-label">Summary of Activities</p>
+        <div class="summary-text">
+            <p style="text-indent: 50px;">We were given time until 12:00 PM to enjoy the surroundings so after breakfast, I went with three friends to Burnham Park. While waiting for the roller skating rink to open, we walked around, took pictures, and bought a few items. We also passed by Maharlika, where I bought ube jam from Good Shepherd. I was unsure at first, but my sister liked it when I brought it home, so it turned out to be a good choice.</p>
+            <p style="text-indent: 50px;">When the skating rink finally opened, we decided to try roller skating. None of us knew how to skate, and although we thought it would be easy, it was not. I spent most of the time falling and laughing with other people who were also struggling, which made the experience even more fun. Even if it was difficult, I still enjoyed it. After that, we returned to the hotel feeling tired but happy.</p>
+            <p style="text-indent: 50px;">We then prepared our things for checkout, had lunch, and left the hotel. We traveled back to the DJM Dorm by bus, with two stops along the way. At one stop, Mega Station, we bought food and ate on the bus. When we arrived, we settled in, and I went with a friend to a nearby laundry shop. After that, I organized my things for the next day, took a bath, and went to sleep.</p>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="learnings-reflection-row">
+        <div class="learnings-col">
+          <p class="section-label">Key Learnings</p>
+          <div class="learnings-text">
+            <p style="text-indent: 50px;">I learned that trying new activities can be challenging, but it can still be enjoyable even with mistakes. I also realized the importance of preparing ahead and managing time during travel.</p>
+          </div>
+        </div>
+        <div class="reflection-col">
+          <p class="section-label">Personal Reflection</p>
+          <div class="reflection-block">
+            <p style="text-indent: 50px;">The last day in Baguio was simple but meaningful. I enjoyed the time I spent with my friends, especially during roller skating. Even though we struggled, we still had fun together. This day reminded me that even small moments can become memorable experiences.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="photos-section">
+        <p class="section-label">Photos from Day 07 <span class="photo-count-badge" id="count-7"></span></p>
+        <div class="photos-preview" id="preview-7"></div>
+        <button class="see-more-btn" onclick="openModal(7)">See All Photos</button>
+      </div>
+    </article>
+
+    <!-- DAY 8 -->
+    <article class="day-entry" id="day-8">
+      <header class="entry-header">
+        <div class="entry-stamp">WMSU<br>IT TOUR<br>DAY 08</div>
+        <div class="entry-day-badge">Day 08 of 08 — Final Day</div>
+        <h2 class="entry-title">Journey Back Home</h2>
+        <div class="entry-meta">
+          <span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>April 12, 2026</span><span class="entry-meta-item"><svg class="entry-meta-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Zamboanga City</span>
+        </div>
+      </header>
+      <div class="content-block">
+        <p class="section-label">Summary of Activities</p>
+        <div class="summary-text">
+            <p style="text-indent: 50px;">We woke up early and had breakfast before preparing for our departure. I was assigned to the second batch for the bus, and we were given packed lunches. Our teacher assisted us with checking in our luggage at the airport.</p>
+            <p style="text-indent: 50px;">After that, I waited with the other students for boarding. We arrived early, so we spent some time at the airport and had our lunch while waiting for our flight. At around 2:00 PM, we boarded the plane and traveled back to Zamboanga.</p>
+            <p style="text-indent: 50px;">When we arrived, we sent updates and pictures in our group chat. My family picked me up at the airport, and when I got home, I shared the souvenirs that I had bought during the trip.</p>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="learnings-reflection-row">
+        <div class="learnings-col">
+          <p class="section-label">Key Learnings</p>
+          <div class="learnings-text">
+            <p style="text-indent: 50px;">I learned the importance of staying organized and prepared during travel, especially when managing time, luggage, and schedules. I also realized how group coordination helps make the travel process smoother.</p>
+          </div>
+        </div>
+        <div class="reflection-col">
+          <p class="section-label">Personal Reflection</p>
+          <div class="reflection-block">
+            <p style="text-indent: 50px;">The final day felt both tiring and fulfilling. I was happy to return home and see my family, but I also felt that the tour ended quickly. This experience gave me new memories, lessons, and motivation that I will carry with me moving forward.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ornament">&#9670; &#9670; &#9670;</div>
+      <div class="photos-section">
+        <p class="section-label">Photos from Day 08 <span class="photo-count-badge" id="count-8"></span></p>
+        <div class="photos-preview" id="preview-8"></div>
+        <button class="see-more-btn" onclick="openModal(8)">See All Photos</button>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <strong>Industry Visit Educational Tour</strong><br>
+  <span>Danisa Biliran · BS Information Technology · WMSU · 2026</span>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="photo-modal" onclick="handleModalClick(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title">Day 01 — Photo Gallery</span>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-grid" id="modal-grid"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lb-arrow lb-prev" onclick="lbNav(-1)">&#8249;</button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lb-arrow lb-next" onclick="lbNav(1)">&#8250;</button>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<!-- Floating back-to-top -->
+<div class="mini-plane-indicator" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+    <circle cx="18" cy="18" r="18" fill="rgba(26,18,9,0.7)"/>
+    <g transform="translate(18,18) rotate(-45) translate(-10,-6)">
+      <path d="M2 6 L16 4 Q20 4 21 6 Q20 8 16 8 L2 6Z" fill="#e8e0d0"/>
+      <path d="M8 6 L11 1 L15 6 L11 7Z" fill="#c8c0b0"/>
+      <path d="M3 6 L5 3 L8 6 L5 7Z" fill="#c8c0b0"/>
+    </g>
+  </svg>
+</div>
+
+<script>
+  const dayTitles = [
+    'Day 01 — First Flight and First Steps into Manila',
+    'Day 02 — Exploring Companies and Facing the Unexpected',
+    'Day 03 — Learning Systems and Taking Time to Rest',
+    'Day 04 — Inspiration, Reality, and Self-Reflection',
+    'Day 05 — A Fun Experience in Tagaytay',
+    'Day 06 — Journey to Baguio and New Experiences',
+    'Day 07 — Simple Moments and Last Day in Baguio',
+    'Day 08 — Journey Back Home'
+  ];
+
+  // ── Image discovery ────────────────────────────────────────────
+  // Strategy 1: fetch assets/D{n}/manifest.json  (array of filenames)
+  // Strategy 2: fetch assets/D{n}/ directory listing and parse <a href> links
+  // Strategy 3: sequential probe 1…MAX_PROBE with common extensions
+  //
+  // Whichever succeeds first wins. Cache results to avoid re-fetching.
+
+  const IMAGE_EXTS = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG', 'WEBP', 'gif', 'GIF'];
+  const MAX_PROBE = 60;
+  const PREVIEW_COUNT = 3;
+
+  const dayImages = {}; // cache: day → string[]
+  const dayLoadPromises = {}; // deduplicate concurrent fetches
+
+  function folderPath(day) {
+    return `assets/D${day}/`;
+  }
+
+  // Strategy 1: manifest.json
+  async function tryManifest(day) {
+    const url = `${folderPath(day)}manifest.json`;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('no manifest');
+    const data = await r.json();
+    // data can be string[] of filenames or {files: string[]}
+    const files = Array.isArray(data) ? data : (data.files || []);
+    return files.map(f => `${folderPath(day)}${f}`);
+  }
+
+  // Strategy 2: directory listing (Apache/Nginx autoindex)
+  async function tryDirectoryListing(day) {
+    const url = folderPath(day);
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('no dir listing');
+    const html = await r.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const links = [...doc.querySelectorAll('a[href]')]
+      .map(a => a.getAttribute('href'))
+      .filter(href => {
+        const lower = href.toLowerCase();
+        return IMAGE_EXTS.some(ext => lower.endsWith('.' + ext.toLowerCase()));
+      })
+      .map(href => {
+        // href may be relative or absolute
+        if (href.startsWith('http') || href.startsWith('/')) return href;
+        return `${url}${href}`;
+      });
+    if (links.length === 0) throw new Error('no images in dir listing');
+    return links;
+  }
+
+  // Strategy 3: sequential probe
+  function tryProbe(day) {
+    return new Promise(resolve => {
+      const found = [];
+      let i = 1;
+
+      function tryNext() {
+        if (i > MAX_PROBE) { resolve(found); return; }
+        let extIdx = 0;
+
+        function tryExt() {
+          if (extIdx >= IMAGE_EXTS.length) {
+            // None of the extensions worked for this index.
+            // Stop if we've had 3 consecutive misses after at least 1 hit
+            if (found.length > 0 && i > found.length + 3) {
+              resolve(found);
+            } else {
+              i++;
+              tryNext();
+            }
+            return;
+          }
+          const path = `${folderPath(day)}${i}.${IMAGE_EXTS[extIdx]}`;
+          const img = new Image();
+          img.onload = () => { found.push(path); i++; tryNext(); };
+          img.onerror = () => { extIdx++; tryExt(); };
+          img.src = path;
+        }
+        tryExt();
+      }
+      tryNext();
+    });
+  }
+
+  // Main loader — tries all strategies, first win is kept
+  function loadDayImages(day) {
+    if (dayImages[day] !== undefined) return Promise.resolve(dayImages[day]);
+    if (dayLoadPromises[day]) return dayLoadPromises[day];
+
+    const promise = (async () => {
+      // Try manifest first (fastest if exists)
+      try {
+        const paths = await tryManifest(day);
+        dayImages[day] = paths;
+        return paths;
+      } catch {}
+
+      // Try directory listing
+      try {
+        const paths = await tryDirectoryListing(day);
+        dayImages[day] = paths;
+        return paths;
+      } catch {}
+
+      // Fall back to sequential probe
+      const paths = await tryProbe(day);
+      dayImages[day] = paths;
+      return paths;
+    })();
+
+    dayLoadPromises[day] = promise;
+    return promise;
+  }
+
+  // ── UI helpers ─────────────────────────────────────────────────
+  function shimmerThumb() {
+    const d = document.createElement('div');
+    d.className = 'photo-thumb';
+    d.innerHTML = '<div class="photo-shimmer"></div>';
+    return d;
+  }
+
+  function emptyThumb() {
+    const d = document.createElement('div');
+    d.className = 'photo-thumb';
+    d.style.cursor = 'default';
+    d.innerHTML = `
+      <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--paper-dark);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--line)" stroke-width="1.5">
+          <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;color:var(--line);">No photo</span>
+      </div>`;
+    return d;
+  }
+
+  function buildPreview(day) {
+    const container = document.getElementById(`preview-${day}`);
+    const countBadge = document.getElementById(`count-${day}`);
+    if (!container) return;
+
+    // Show shimmer placeholders immediately
+    container.innerHTML = '';
+    for (let k = 0; k < PREVIEW_COUNT; k++) container.appendChild(shimmerThumb());
+
+    loadDayImages(day).then(paths => {
+      container.innerHTML = '';
+
+      if (countBadge) {
+        countBadge.textContent = paths.length > 0 ? `${paths.length} photo${paths.length !== 1 ? 's' : ''}` : '';
+        countBadge.style.display = paths.length > 0 ? '' : 'none';
+      }
+
+      const preview = paths.slice(0, PREVIEW_COUNT);
+      if (preview.length === 0) {
+        for (let k = 0; k < PREVIEW_COUNT; k++) container.appendChild(emptyThumb());
+        return;
+      }
+
+      preview.forEach((src, idx) => {
+        const d = document.createElement('div');
+        d.className = 'photo-thumb';
+        d.onclick = () => openLightbox(day, idx);
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Day ${day} photo ${idx + 1}`;
+        img.loading = 'lazy';
+        d.appendChild(img);
+        container.appendChild(d);
+      });
+    });
+  }
+
+  // Build all previews on load
+  for (let d = 1; d <= 8; d++) buildPreview(d);
+
+  // ── Day transition overlay ─────────────────────────────────────
+  function showDay(n, btn) {
+    const overlay = document.getElementById('dt-overlay');
+    document.getElementById('dt-number').textContent = String(n).padStart(2, '0');
+    document.getElementById('dt-title').textContent = dayTitles[n - 1].replace(/^Day \d+ — /, '');
+
+    const dotsEl = document.getElementById('dt-dots');
+    dotsEl.innerHTML = '';
+    for (let i = 1; i <= 8; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dt-dot' + (i === n ? ' active' : '');
+      dotsEl.appendChild(dot);
+    }
+
+    const busEl = document.getElementById('dt-bus');
+    busEl.style.animation = 'none';
+    void busEl.offsetWidth;
+    busEl.style.animation = '';
+
+    overlay.classList.remove('exiting');
+    overlay.classList.add('entering');
+
+    setTimeout(() => {
+      document.querySelectorAll('.day-entry').forEach(e => e.classList.remove('active'));
+      document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('day-' + n).classList.add('active');
+      btn.classList.add('active');
+      const aboutSec = document.getElementById('aboutSection');
+      if (aboutSec) aboutSec.classList.remove('visible');
+      buildPreview(n);
+    }, 500);
+
+    setTimeout(() => {
+      overlay.classList.add('exiting');
+      overlay.classList.remove('entering');
+      setTimeout(() => overlay.classList.remove('exiting'), 350);
+      document.getElementById('entries').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 1400);
+  }
+
+  // ── Modal ──────────────────────────────────────────────────────
+  let currentLbDay = 1;
+  let currentLbIndex = 0;
+
+  function openModal(dayNum) {
+    const modal = document.getElementById('photo-modal');
+    const grid = document.getElementById('modal-grid');
+    document.getElementById('modal-title').textContent = dayTitles[dayNum - 1] + ' — Gallery';
+    grid.innerHTML = '<div style="color:rgba(212,196,160,0.4);padding:40px;text-align:center;font-family:DM Mono,monospace;font-size:11px;letter-spacing:0.15em;grid-column:1/-1;">Loading photos…</div>';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    loadDayImages(dayNum).then(paths => {
+      grid.innerHTML = '';
+      if (paths.length === 0) {
+        grid.innerHTML = `<div style="color:rgba(212,196,160,0.3);padding:48px;text-align:center;font-family:DM Mono,monospace;font-size:11px;letter-spacing:0.15em;grid-column:1/-1;">No photos found in assets/D${dayNum}/</div>`;
+        return;
+      }
+      paths.forEach((src, idx) => {
+        const item = document.createElement('div');
+        item.className = 'modal-photo';
+        item.innerHTML = `
+          <img src="${src}" alt="Day ${dayNum} photo ${idx + 1}" loading="lazy">
+          <div class="modal-photo-overlay">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+            </svg>
+          </div>`;
+        item.onclick = () => { closeModal(); openLightbox(dayNum, idx); };
+        grid.appendChild(item);
+      });
+    });
+  }
+
+  function closeModal() {
+    document.getElementById('photo-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleModalClick(e) {
+    if (e.target === document.getElementById('photo-modal')) closeModal();
+  }
+
+  // ── Lightbox ───────────────────────────────────────────────────
+  function openLightbox(day, index) {
+    currentLbDay = day;
+    currentLbIndex = index;
+    loadDayImages(day).then(paths => {
+      if (!paths.length) return;
+      const idx = Math.min(index, paths.length - 1);
+      currentLbIndex = idx;
+      document.getElementById('lightbox-img').src = paths[idx];
+      updateLbCounter(paths.length);
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+
+  function updateLbCounter(total) {
+    const el = document.getElementById('lb-counter');
+    if (el) el.textContent = `${currentLbIndex + 1} / ${total}`;
+  }
+
+  function lbNav(dir) {
+    loadDayImages(currentLbDay).then(paths => {
+      if (!paths.length) return;
+      currentLbIndex = (currentLbIndex + dir + paths.length) % paths.length;
+      const img = document.getElementById('lightbox-img');
+      img.style.opacity = '0';
+      img.style.transition = 'opacity 0.15s';
+      setTimeout(() => {
+        img.src = paths[currentLbIndex];
+        img.style.opacity = '1';
+      }, 150);
+      updateLbCounter(paths.length);
+    });
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightbox-img').src = '';
+    document.body.style.overflow = '';
+  }
+
+  // ── Stars ──────────────────────────────────────────────────────
+  (function () {
+    const container = document.getElementById('heroStars');
+    for (let i = 0; i < 55; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random() * 2.5 + 0.5;
+      s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random() * 100}%;left:${Math.random() * 100}%;--dur:${(Math.random() * 3 + 2).toFixed(1)}s;--del:${(Math.random() * 5).toFixed(1)}s;`;
+      container.appendChild(s);
+    }
+  })();
+
+  // ── Keyboard nav ───────────────────────────────────────────────
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLightbox(); closeModal(); }
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      if (e.key === 'ArrowLeft') lbNav(-1);
+      if (e.key === 'ArrowRight') lbNav(1);
+    }
+  });
+
+  // ── Swipe support for lightbox ─────────────────────────────────
+  let touchStartX = 0;
+  document.getElementById('lightbox').addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  document.getElementById('lightbox').addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  // ── About / Entries links ──────────────────────────────────────
+  document.getElementById('aboutLink').addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.day-entry').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+    const sec = document.getElementById('aboutSection');
+    sec.classList.add('visible');
+    sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.getElementById('entriesLink').addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('aboutSection').classList.remove('visible');
+    const any = [...document.querySelectorAll('.day-entry')].some(el => el.classList.contains('active'));
+    if (!any) showDay(1, document.querySelector('.day-tab'));
+    document.getElementById('entries').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // ── Scroll progress ────────────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.getElementById('scrollProgress').style.width = pct + '%';
+  });
+
+  document.getElementById('aboutSection').classList.remove('visible');
+</script>
+</body>
+</html>
